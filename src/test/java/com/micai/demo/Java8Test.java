@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -28,6 +30,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import javax.security.auth.x500.X500Principal;
 
 import org.apache.el.stream.Optional;
 import org.junit.Test;
@@ -51,9 +55,36 @@ public class Java8Test {
 		Map<String, String> map = new HashMap<>();
 		map.put("1", "001");
 		map.put("2", "002");
+		System.out.println(map);
 	}
 
-	/** 接口默认方法 */
+	@Test
+	public void test01(){
+		List<Integer> list = new ArrayList<>();
+		list.add(23);
+		list.add(34);
+		list.add(31);
+		list.add(23);
+		//1.遍历
+		list.forEach(c->{
+			System.out.println(c);
+		});
+		//2.判断打印和存放集合
+		list.stream().filter(c->c>30).forEach(System.out::print);
+		System.out.println("判断=" +list.stream().filter(c->c==30).collect(Collectors.toList()));
+
+		//3.取值
+		System.out.println("最小值=" + list.stream().mapToInt(c->c).min().getAsInt());
+		System.out.println("平均值=" + list.stream().mapToInt(c->c).average().getAsDouble());
+		System.out.println("和值=" + list.stream().mapToInt(c->c).sum());
+		//4.集合
+		List list2 = list.stream().filter(c->c>30).collect(Collectors.toList());
+		System.out.println("集合=" + list2);
+		//
+		
+	}
+	/** 接口默认方法
+	 * 优势：扩展接口，不用每个子类都实现，子类可通过重写选择使用哪一个。 */
 	@Test
 	public void test2() {
 		BootStrapTest test1 = new BootStrapTest();
@@ -61,7 +92,8 @@ public class Java8Test {
 		System.out.println("java8-> absSub(): " + result1);
 	}
 
-	/** 静态方法 */
+	/** 静态方法 
+	 * 优势：增加了和类的静态方法调用一致。*/
 	@Test
 	public void test3() {
 		double result1 = BootStrapInterface1.div(4, 2);
@@ -93,6 +125,7 @@ public class Java8Test {
 		Calendar cal = Calendar.getInstance();
 		cal.set(2018, 3, 20);
 		Date date = cal.getTime();
+		System.out.println("java8->自定义日期(old0)：" + date);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String dateToStr = format.format(date);
 		System.out.println("java8->自定义日期(old)：" + dateToStr);
@@ -121,9 +154,10 @@ public class Java8Test {
 	@Test
 	public void test7() {
 		Instant timestamp = Instant.now();
-//		timestamp.atOffset(ZoneOffset.ofHours(8));
-//		ZonedDateTime zoneDateTime = timestamp.atZone(ZoneId.systemDefault());
+		timestamp.atOffset(ZoneOffset.ofHours(8));//东8区时间+8
+		ZonedDateTime zoneDateTime = timestamp.atZone(ZoneId.systemDefault());
 		System.out.println("java8-> 瞬时时间：" + timestamp);
+		System.out.println("java8-> 瞬时时间：" + zoneDateTime);
 	}
 
 	/** {@link Duration} */

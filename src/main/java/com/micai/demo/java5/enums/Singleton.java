@@ -9,7 +9,7 @@ public class Singleton {
 	private Singleton() {
 	}
 
-	// 1.懒汉模式
+	// 1.饿汉模式
 	public static Singleton getInstanc1() {
 		return singleton;
 	}

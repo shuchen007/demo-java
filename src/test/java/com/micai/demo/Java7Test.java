@@ -22,7 +22,7 @@ public class Java7Test {
 	public void test1() {
 		Integer[] arr = new Integer[] { 4 };
 		try {
-			int result = arr[0] / 0;
+			int result = arr[4] / 0;
 			System.out.println("java7-> 捕获多异常: result:" + result);
 		} 
 		catch (ArrayIndexOutOfBoundsException | ArithmeticException e) {

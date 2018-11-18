@@ -2,6 +2,15 @@ package com.micai.demo.java5.generic;
 
 public class GenericClass<T> {
 	private T t;
+	private String a;
+
+	public String getA() {
+		return a;
+	}
+
+	public void setA(String a) {
+		this.a = a;
+	}
 
 	public T getT() {
 		return t;

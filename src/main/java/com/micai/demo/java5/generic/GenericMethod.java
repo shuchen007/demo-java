@@ -24,5 +24,4 @@ public class GenericMethod {
 		List<String> list = new ArrayList<String>();
 		Map<String, String> map = new HashMap<>();
 	}
-
 }

@@ -13,13 +13,17 @@ import com.micai.demo.java5.generic.GenericMethod;
 
 import static java.lang.System.*;
 
+import java.awt.List;
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.Collections;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class Java5Test {
 	
+
+	private static final String String类型 = null;
 
 	/**可变参数*/
 	@Test
@@ -42,13 +46,21 @@ public class Java5Test {
 		out.println("java5->静态引入.");
 	}
 	
-	/**泛型类*/
+	/**泛型类
+	 * @param <T>
+	 * @param <T>*/
 	@Test
-	public void testGeneric1() {
+	public <T> void testGeneric1() {
 		// 泛型类
-		GenericClass<String> gClass = new GenericClass<>();
-		gClass.setT("String类型");
+		GenericClass<Integer> gClass = new GenericClass();
+		gClass.setT(23);
+		gClass.setA("String类型1");
 		System.out.println("java5->泛型类:"+gClass.getT());
+		System.out.println("java5->泛型类:"+gClass.getA());
+		ArrayList<T> aaa = new ArrayList<T>();//这样定义不行，泛型引用一定要指定参数类型。
+		aaa.add((T)"DF");
+		aaa.add((T) "df");//这样编译期就会报错。
+		out.print(aaa);
 	}
 	
 	/**泛型方法*/
@@ -67,6 +79,7 @@ public class Java5Test {
 		System.out.println("java5->枚举: "+Season.valueOf("WINTER"));
 		// valueOf
 		Season[] arr = Season.values();
+		out.println(Arrays.asList(arr));
 		Arrays.asList(arr).stream().forEach(x -> System.out.print(x+"  "));
 		// static {} 的作用.
 	}
