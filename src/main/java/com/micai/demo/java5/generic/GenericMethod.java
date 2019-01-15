@@ -7,11 +7,15 @@ import java.util.Map;
 
 public class GenericMethod {
 
-	public <K, V> V getValue(K k, V v) {
-		return v;
+	public <K, V> void getValue(K k, V v) {
+//		return v;
 	}
 
 	public static <K extends Object> void setK(K k) {
+
+	}
+	
+	public static void getV(List<? super GenericClass> list) {
 
 	}
 
